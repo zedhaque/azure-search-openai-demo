@@ -82,7 +82,7 @@ self.valid_audiences = [f"api://{server_app_id}", str(server_app_id)]
 # See https://learn.microsoft.com/entra/identity-platform/access-tokens#validate-the-issuer for more information on token validation
 self.key_url = f"https://login.microsoftonline.com/{tenant_id}/discovery/v2.0/keys"
 ```
-Make sure to update the authority URL in the modified code. Replace `xxxxx` with the first part of your External Entra ID tenant's primary domain (e.g., `your-tenant-name` from `your-tenant-name.onmicrosoft.com`), which you collected earlier during the tenant setup. 
+Make sure to update the authority URL in the modified code. Replace `xxxxx` with the first part of your External Entra ID tenant's primary domain (e.g., `your-primary-domain-name` from `your-primary-domain-name.onmicrosoft.com`), which you collected earlier during the tenant setup. 
 
 ### App Service Settings
 1. Log in to the Azure portal and navigate to your App Service instance. On the "Edit Identity Provider" page, update the issuer URL from `https://login.microsoftonline.com/{tenant-id}/v2.0` to `https://xxxxx.ciamlogin.com/{tenant-id}/v2.0`. The tenant ID is already correct from when you first ran the azd up command in step 5, so no changes to the tenant ID are necessary, regardless you should validate the tenant-id reflects your Entra External Tenant ID.
