@@ -19,6 +19,12 @@ This guide outlines the process to add optional login functionality for external
 - **Azure Account Permissions:** You must have the appropriate [permissions to manage applications in Microsoft Entra](https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#cloud-application-administrator).
 - **Microsoft Entra External ID Integration:** You need an active Microsoft Entra External ID tenant. Follow [this guide](https://learn.microsoft.com/en-us/entra/external-id/customers/how-to-create-external-tenant-portal) to create the tenant and obtain the Tenant ID, Primary Domain, and Username. The Tenant ID will be used to set the `AZURE_AUTH_TENANT_ID` environment variable, the Primary Domain will be used to construct the authority URL in the code, and the Username will be required for post-deployment login checks.
 
+![tenant-overview](https://github.com/user-attachments/assets/661cf7a6-94a9-4ae4-bb91-8233c6ff8a13)
+**Screenshot: Tenant ID and Primary Domain**
+
+![Screenshot 2024-09-10 at 12 00 06 PM](https://github.com/user-attachments/assets/d0fa4fb1-3eeb-48ea-b5d9-d552b63e2357)
+**Screenshot: Username (ends with .onmicrosoft.com)**
+
 Before proceeding, make sure your app is running without authentication and the chat app is functional.
 
 ## Setting Up Microsoft Entra External ID Applications
@@ -85,6 +91,9 @@ Make sure to update the authority URL in the modified code. Replace `xxxxx` with
 3. Deploy your app by running `azd deploy` to apply all the code modifications made above.
 4. **IMPORTANT:** Running `azd up` triggers various automated authentication scripts that can override your manual App Service settings changes. Ensure you manually verify the above settings after running `azd up`, and restart the App Service to apply the modified settings.
 5. After the deployment is complete, visit the site URL and log in using your Azure Tenant (External) credentials, which were collected during the Entra External Tenant setup. Once logged in, go to **Developer Settings** and verify the additional authentication details at the bottom of the page.
+
+![Screenshot 2024-09-11 at 7 29 11 PM](https://github.com/user-attachments/assets/34153766-9a54-4cbb-9615-5c0dd289145a)
+**Screenshot: Issuer URL**
 
 ### Optional Settings
 1. (Optional) To require access control when using the app, run azd env set AZURE_ENFORCE_ACCESS_CONTROL true. Authentication is always required to search on documents with access control assigned, regardless of if unauthenticated access is enabled or not.
